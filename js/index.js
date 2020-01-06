@@ -186,21 +186,21 @@ $(document).ready(function () {
     $(".hide-share-bg").hide()
     $(".share-content").hide()
     //一进页面就加载第一条音频
-    $("audio").attr("src", musicArr[0])
+    // $("audio").attr("src", musicArr[0])
     //监听具体的事件然后模拟播放
-    document.addEventListener('DOMContentLoaded', function () {
-        function audioAutoPlay() {
-            // var audio = document.getElementById('love_music');
-            // audio.play();
-            $("audio").attr("src", musicArr[0])[0].play();
-            //在iOS的微信中播放的话可以监听微信的read事件
-            document.addEventListener("WeixinJSBridgeReady", function () {
-                // audio.play();
-                $("audio").attr("src", musicArr[0])[0].play();
-            }, false);
-        }
-        audioAutoPlay();
-    });
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     function audioAutoPlay() {
+    //         // var audio = document.getElementById('love_music');
+    //         // audio.play();
+    //         $("audio").attr("src", musicArr[0])[0].play();
+    //         //在iOS的微信中播放的话可以监听微信的read事件
+    //         document.addEventListener("WeixinJSBridgeReady", function () {
+    //             // audio.play();
+    //             $("audio").attr("src", musicArr[0])[0].play();
+    //         }, false);
+    //     }
+    //     audioAutoPlay();
+    // });
 
     var mySwiper = new Swiper('#eventsSwiper', {
         direction: 'vertical', // 垂直切换选项
