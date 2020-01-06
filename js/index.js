@@ -187,14 +187,20 @@ $(document).ready(function () {
     $(".share-content").hide()
     //一进页面就加载第一条音频
     $("audio").attr("src", musicArr[0])
-    if ($(".music").hasClass("play")) {
-        $(".music").addClass("play");
-        $("audio").attr("src", musicArr[0])[0].play(); /*播放*/
-    } else {
-        // var player = ;
-        $(".music").removeClass("play");
-        $("audio").attr("src", musicArr[0])[0].pause(); /*暂停*/
-    }
+    //监听具体的事件然后模拟播放
+    document.addEventListener('DOMContentLoaded', function () {
+        function audioAutoPlay() {
+            // var audio = document.getElementById('love_music');
+            // audio.play();
+            $("audio").attr("src", musicArr[0])[0].play();
+            //在iOS的微信中播放的话可以监听微信的read事件
+            document.addEventListener("WeixinJSBridgeReady", function () {
+                // audio.play();
+                $("audio").attr("src", musicArr[0])[0].play();
+            }, false);
+        }
+        audioAutoPlay();
+    });
 
     var mySwiper = new Swiper('#eventsSwiper', {
         direction: 'vertical', // 垂直切换选项
@@ -225,15 +231,15 @@ $(document).ready(function () {
             slideChangeTransitionEnd: function () { //回调函数，swiper从一个slide过渡到另一个slide结束时执行。
                 swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
                 this.slides.eq(this.realIndex).find('.ani').removeClass('ani'); //动画只展现一次，去除ani类名
-                // if ($(".swiper-slide-active").find(".question-answer")) { //判断当前页下有没有question-answer-》判断是不是选择题
-                //     $(".swiper-slide-active").find(".question-answer").parents(".swiper-slide-active").addClass("swiper-no-swiping");
-                // }
-                // if ($(".swiper-slide-active").find("#swiper-history")) { //如果是时间轴页面，禁止回退到选择题部分
-                //     mySwiper.allowSlidePrev = false
-                // }
-                // if($(".swiper-slide-active").find("#slide_8")){ //如果是结果页面，可以向上回退到时间轴页面
-                //     mySwiper.allowSlidePrev = true
-                // }
+                if ($(".swiper-slide-active").find(".question-answer")) { //判断当前页下有没有question-answer-》判断是不是选择题
+                    $(".swiper-slide-active").find(".question-answer").parents(".swiper-slide-active").addClass("swiper-no-swiping");
+                }
+                if ($(".swiper-slide-active").find("#swiper-history")) { //如果是时间轴页面，禁止回退到选择题部分
+                    mySwiper.allowSlidePrev = false
+                }
+                if($(".swiper-slide-active").find("#slide_8")){ //如果是结果页面，可以向上回退到时间轴页面
+                    mySwiper.allowSlidePrev = true
+                }
             },
             touchEnd: function (event) { //数触摸释放时执行
                 if (mySwiper.isEnd || mySwiper.realIndex == 6) {
@@ -342,13 +348,13 @@ $(document).ready(function () {
                             mySwiper.slideTo(questions[0] - 1, 1000, false);
                         } else {
                             //全部答完
-                            // // console.log("全部答完");
-                            // $(".swiper-slide-active").find(".question-answer").parents(".swiper-slide-active").removeClass("swiper-no-swiping");
-                            // mySwiper.slideNext();
+                            // console.log("全部答完");
+                            $(".swiper-slide-active").find(".question-answer").parents(".swiper-slide-active").removeClass("swiper-no-swiping");
+                            mySwiper.slideNext();
                         }
                     } else {
-                        // $(".swiper-slide-active").find(".question-answer").parents(".swiper-slide-active").removeClass("swiper-no-swiping");
-                        // mySwiper.slideNext();
+                        $(".swiper-slide-active").find(".question-answer").parents(".swiper-slide-active").removeClass("swiper-no-swiping");
+                        mySwiper.slideNext();
                     }
                 }
             }, 500);
