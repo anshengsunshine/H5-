@@ -181,7 +181,8 @@ var qNum = 7,
     ClickFlag = false,
     modifier = 2; //每天的px
 
-const _audio = document.getElementById('audio');
+const _audio = document.getElementById('audio'),
+    isPlay = false;
 if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
     _audio.play();
 } else {
