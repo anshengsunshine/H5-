@@ -211,6 +211,12 @@ $(document).ready(function () {
 
 })
 
+window.onpageshow = function (event) {
+    if (event.persisted) {
+        window.location.reload();
+    }
+}
+
 //判断索引题目是否已答
 function IsAnwsered(index) {
     var qname = "q" + (index);
