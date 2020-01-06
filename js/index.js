@@ -181,6 +181,32 @@ var qNum = 7,
     ClickFlag = false,
     modifier = 2; //每天的px
 
+const _audio = document.getElementById('audio');
+if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+    _audio.play();
+} else {
+    if (document.addEventListener) {
+        document.addEventListener("WeixinJSBridgeReady", function () {
+            _audio.play();
+        }, false);
+    } else if (document.attachEvent) {
+        document.attachEvent("WeixinJSBridgeReady", function () {
+            _audio.play();
+        });
+        document.attachEvent("onWeixinJSBridgeReady", function () {
+            _audio.play();
+        });
+    }
+}
+
+
+document.addEventListener("touchstart", function (e) {
+    if (isPlay) {
+        _audio.play();
+        isPlay = false;
+    }
+}, false);
+
 $(document).ready(function () {
     //隐藏弹出框
     $(".hide-share-bg").hide()
@@ -237,7 +263,7 @@ $(document).ready(function () {
                 if ($(".swiper-slide-active").find("#swiper-history")) { //如果是时间轴页面，禁止回退到选择题部分
                     mySwiper.allowSlidePrev = false
                 }
-                if($(".swiper-slide-active").find("#slide_8")){ //如果是结果页面，可以向上回退到时间轴页面
+                if ($(".swiper-slide-active").find("#slide_8")) { //如果是结果页面，可以向上回退到时间轴页面
                     mySwiper.allowSlidePrev = true
                 }
             },
