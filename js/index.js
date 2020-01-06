@@ -10,14 +10,19 @@ var qNum = 7,
 $(document).ready(function () {
 
     // //触屏即加载音乐
-    document.addEventListener('touchstart', function () {
-        document.getElementById('audio').play()
-    })
+    // document.addEventListener('touchstart', function () {
+    //     document.getElementById('audio').play()
+    // })
 
-    //进入微信页面即加载
-    document.addEventListener('WeixinJSBridgeReady', function () {
-        document.getElementById('audio').play()
-    })
+    // //进入微信页面即加载
+    // document.addEventListener('WeixinJSBridgeReady', function () {
+    //     document.getElementById('audio').play()
+    // })
+
+    document.addEventListener("WeixinJSBridgeReady", function () {
+        document.getElementById('audio').play();
+
+    }, false);
 
     //隐藏弹出框
     $(".hide-share-bg").hide()
