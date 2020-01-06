@@ -23,7 +23,7 @@ $(document).ready(function () {
     $(".hide-share-bg").hide()
     $(".share-content").hide()
 
-    
+
 
     //音乐加载地址
     $("audio").attr("src", musicOggArr[0])
@@ -33,13 +33,16 @@ $(document).ready(function () {
     });
     //判断音乐的播放和暂停
     $(".music-switch").click(function () {
-        if (isAudio) {
-            oAudio.play();
-            $(".music").addClass("play");
-        } else {
-            oAudio.pause();
-            $(".music").removeClass("play");
+        if (audio !== null) {
+            if (isAudio) {
+                oAudio.play();
+                $(".music").addClass("play");
+            } else {
+                oAudio.pause();
+                $(".music").removeClass("play");
+            }
         }
+
     })
 
     var mySwiper = new Swiper('#eventsSwiper', {
@@ -97,7 +100,7 @@ $(document).ready(function () {
             init: function () {
                 mySlides = '';
                 for (var i = 0; i < historyList.length; i++) {
-                    this.appendSlide('<div class="swiper-slide slide' + i + '"><div class="event-msg"><a target="_self" href="' + historyList[i]['hrefEv'] + '"><img class="srcImg" src="' + historyList[i]['srcImg'] + '"/><p>' + historyList[i]['title'] + '</p></div></a></div>');
+                    this.appendSlide('<div class="swiper-slide slide' + i + '"><a target="_self" href="' + historyList[i]['hrefEv'] + '"><div class="event-msg"><img class="srcImg" src="' + historyList[i]['srcImg'] + '"/><p>' + historyList[i]['title'] + '</p></div></div></a>');
                     if (historyList[i]['danmuContent']) {
                         $("#slide_7 .screen .s_show").append("<div class='magictime twisterInUp'><img src='" + historyList[i]['hraderImg'] + "'/><span>" + historyList[i]['danmuContent'] + "</span></div>")
                     }
@@ -137,16 +140,18 @@ $(document).ready(function () {
         'setTimeoutFun': function () {
             setTimeout(function () {
                 //等待500ms，确保label绑定的事件执行
-
-                if ($(".music").hasClass("play") && !audio.paused) {
-                    $(".music").addClass("play");
-                    $("audio").attr("src", musicOggArr[mySwiper.realIndex])[0].play(); /*播放*/
-                    audio.paused = false;
-                } else {
-                    $(".music").removeClass("play");
-                    $("audio").attr("src", musicOggArr[mySwiper.realIndex])[0].pause(); /*暂停*/
-                    audio.paused = true;
+                if (isAudio) {
+                    if ($(".music").hasClass("play") && !audio.paused) {
+                        $(".music").addClass("play");
+                        $("audio").attr("src", musicOggArr[mySwiper.realIndex])[0].play(); /*播放*/
+                        audio.paused = false;
+                    } else {
+                        $(".music").removeClass("play");
+                        $("audio").attr("src", musicOggArr[mySwiper.realIndex])[0].pause(); /*暂停*/
+                        audio.paused = true;
+                    }
                 }
+
 
                 var realIndex = mySwiper.realIndex + 1;
                 if (ClickFlag) {
