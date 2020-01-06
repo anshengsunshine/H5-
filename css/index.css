@@ -92,13 +92,14 @@ body {
 }
 
 /*  所有的radio去掉默认样式  */
-label input[type="radio"] {
+.swiper-slide .question-answer label input[type="radio"] {
     appearance: none;
     -webkit-appearance: none;
     outline: none;
     margin: 0;
     vertical-align: text-bottom;
     margin-right: 0.1rem;
+    border:none;
 }
 
 label {
@@ -110,7 +111,7 @@ label {
 /* 选中后的图片样式 */
 .checked-img {
     width: 10vw;
-    height: 5vh;
+    height: 10vw;
     padding: 1vw 5vw;
     position: fixed;
     z-index: 1;
@@ -118,6 +119,7 @@ label {
     background-repeat: no-repeat;
     background-size: 100%;
     display: none;
+    border:none;
 }
 
 #slide_3 .second-question-answer .checked-img {
@@ -229,6 +231,7 @@ label {
     width: 100%;
     height: 100%;
     z-index: 2;
+    overflow: hidden;
 }
 
 .rain.back-row {
@@ -434,17 +437,17 @@ body.back-row-toggle .rain.back-row {
 
 #slide_4 .third-question {
     width: 24vw;
-    color: #d0d0d0;
+    height: 46vh;
     position: absolute;
     left: 0;
+    margin-top: 7vh;
+    color: #d0d0d0;
     font-size: 1.375rem;
     text-align: center;
     font-weight: 500;
     font-family: PingFangSC-Semibold;
-    height: 46vh;
     writing-mode: vertical-lr;
     writing-mode: tb-lr;
-    margin-top: 5vh;
     overflow: hidden;
     animation: stepAnimate 4s linear;
     animation-timing-function: steps(10, end);
