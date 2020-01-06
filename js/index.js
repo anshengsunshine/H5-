@@ -19,7 +19,8 @@ $(document).ready(function () {
     })
 
     //隐藏弹出框
-    $(".hide-share-bg").hide() $(".share-content").hide()
+    $(".hide-share-bg").hide()
+    $(".share-content").hide()
 
     $("audio").attr("src", musicArr[0])
 
