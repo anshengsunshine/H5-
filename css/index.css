@@ -99,7 +99,7 @@ body {
     margin: 0;
     vertical-align: text-bottom;
     margin-right: 0.1rem;
-    border:none;
+    border: none;
 }
 
 label {
@@ -119,7 +119,7 @@ label {
     background-repeat: no-repeat;
     background-size: 100%;
     display: none;
-    border:none;
+    border: none;
 }
 
 #slide_3 .second-question-answer .checked-img {
@@ -312,7 +312,7 @@ body.back-row-toggle .rain.back-row {
 .question-answer {
     width: 98vw;
     height: 100%;
-    padding: 3.6rem 1rem 1rem 0.4rem;
+    padding: 3rem 1rem 0rem 0.4rem;
 }
 
 #slide_2 .first-question,
@@ -366,9 +366,9 @@ body.back-row-toggle .rain.back-row {
 
 #slide_3 .second-answer {
     float: left;
-    width: 40vw;
-    height: 17vh;
-    margin: 4vw;
+    width: 46vw;
+    height: 23vh;
+    margin: 1vw;
     color: #d0d0d0;
     background-size: 100% 100%;
     font-size: 0.8rem;
