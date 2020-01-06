@@ -7,6 +7,18 @@ var qNum = 7,
     modifier = 2; //每天的px
 
 $(document).ready(function () {
+
+    //触屏即加载音乐
+
+    // document.addEventListener('touchstart', function() {
+    // document.getElementById('audio').play()
+    // }
+
+    //进入微信页面即加载
+    document.addEventListener('WeixinJSBridgeReady', function () {
+        document.getElementById('audio').play()
+    })
+
     //隐藏弹出框
     $(".hide-share-bg").hide()
     $(".share-content").hide()
