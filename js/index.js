@@ -28,22 +28,31 @@ $(document).ready(function () {
     console.log(oAudio)
     //判断音乐的播放和暂停
     $(".music-switch").click(function () {
-        if (audio.paused) {
-            oAudio.play();
-        } else {
-            oAudio.pause();
-        }
+        // if (audio.paused) {
+        //     oAudio.play();
+        // } else {
+        //     oAudio.pause();
+        // }
+        oAudio.addEventListener("canplay", function () { //监听audio是否加载完毕，如果加载完毕，则读取audio播放时间
+            // console.log(audio.duration)
+            // console.log(audio.paused)
+            if (audio.paused) {
+                oAudio.play();
+            } else {
+                oAudio.pause();
+            }
+        });
     })
 
-    oAudio.addEventListener("canplay", function () { //监听audio是否加载完毕，如果加载完毕，则读取audio播放时间
-        // console.log(audio.duration)
-        // console.log(audio.paused)
-        if (audio.paused) {
-            oAudio.play();
-        } else {
-            oAudio.pause();
-        }
-    });
+    // oAudio.addEventListener("canplay", function () { //监听audio是否加载完毕，如果加载完毕，则读取audio播放时间
+    //     // console.log(audio.duration)
+    //     // console.log(audio.paused)
+    //     if (audio.paused) {
+    //         oAudio.play();
+    //     } else {
+    //         oAudio.pause();
+    //     }
+    // });
 
     var mySwiper = new Swiper('#eventsSwiper', {
         direction: 'vertical', // 垂直切换选项
