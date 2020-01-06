@@ -1,30 +1,3 @@
-// (function (doc, win) {
-//     var docEl = doc.documentElement,
-
-//         resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-
-//         recalc = function () {
-
-//             var clientWidth = docEl.clientWidth;
-
-//             if (!clientWidth) return;
-
-//             docEl.style.fontSize = 100 * (clientWidth / 320) + 'px';
-
-//         };
-
-
-
-//     // Abort if browser does not support addEventListener
-
-//     if (!doc.addEventListener) return;
-
-//     win.addEventListener(resizeEvt, recalc, false);
-
-//     doc.addEventListener('DOMContentLoaded', recalc, false);
-
-// })(document, window);
-
 var qNum = 7,
     answerArr = new Array(),
     flagArr = new Array(),
@@ -33,58 +6,22 @@ var qNum = 7,
     ClickFlag = false,
     modifier = 2; //每天的px
 
-function audioAutoPlay(id) {
-
-    var audio = document.getElementById(id),
-
-        play = function () {
-
-            audio.play();
-
-            document.removeEventListener("touchstart", play, false);
-
-        };
-
-    audio.play();
-
-    document.addEventListener("WeixinJSBridgeReady", function () {
-
-        play();
-
-    }, false);
-
-    document.addEventListener('YixinJSBridgeReady', function () {
-
-        play();
-
-    }, false);
-
-    document.addEventListener("touchstart", play, false);
-
-}
-
-audioAutoPlay('audio');
-
 $(document).ready(function () {
     //隐藏弹出框
     $(".hide-share-bg").hide()
     $(".share-content").hide()
-    //一进页面就加载第一条音频
-    // $("audio").attr("src", musicArr[0])
-    //监听具体的事件然后模拟播放
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     function audioAutoPlay() {
-    //         // var audio = document.getElementById('love_music');
-    //         // audio.play();
-    //         $("audio").attr("src", musicArr[0])[0].play();
-    //         //在iOS的微信中播放的话可以监听微信的read事件
-    //         document.addEventListener("WeixinJSBridgeReady", function () {
-    //             // audio.play();
-    //             $("audio").attr("src", musicArr[0])[0].play();
-    //         }, false);
-    //     }
-    //     audioAutoPlay();
-    // });
+
+    $("audio").attr("src", musicArr[0])
+
+    $(".music-switch").click(function () { //音乐的播放和暂停
+        if ($(".music").hasClass("play")) {
+            $(".music").removeClass("play");
+            $("audio")[0].pause(); /*暂停*/
+        } else {
+            $(".music").addClass("play");
+            $("audio")[0].play(); /*播放*/
+        }
+    })
 
     var mySwiper = new Swiper('#eventsSwiper', {
         direction: 'vertical', // 垂直切换选项
@@ -160,29 +97,14 @@ $(document).ready(function () {
 
     })
 
-    // <img src=" + up + " alt=\"\" style=\"width: 10vw;height: 10vw\">
-
-    $(".music-switch").click(function () { //音乐的播放和暂停
-        if ($(".music").hasClass("play")) {
-            $(".music").removeClass("play");
-            $("audio")[0].pause(); /*暂停*/
-        } else {
-            // var player = ;
-            $(".music").addClass("play");
-            $("audio")[0].play(); /*播放*/
-        }
-    })
-
     // 每一个label点击后，获取该选项对应的结果内容
     $("label").on("click", function () {
         let acIndex = mySwiper.realIndex + 1;
         anwser = "";
         $(this).find("input[type='radio']").attr("checked", "checked");
         if (IsAnwsered(acIndex - 1)) {
-            // $(this).find(".checked-img").css("display", "none");
             $(".checked-img").css("display", "none");
             $(this).parent().find(".checked-img").toggle();
-            // $(this).find(".checked-img").css("display", "block");
             ClickFlag = true;
             anwser = $(this).find("input[type='radio']:checked").val();
             ArrayInsert(acIndex - 1, anwser);
@@ -201,7 +123,6 @@ $(document).ready(function () {
                     $(".music").addClass("play");
                     $("audio").attr("src", musicArr[mySwiper.realIndex])[0].play(); /*播放*/
                 } else {
-                    // var player = ;
                     $(".music").removeClass("play");
                     $("audio").attr("src", musicArr[mySwiper.realIndex])[0].pause(); /*暂停*/
                 }
