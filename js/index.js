@@ -1,38 +1,49 @@
 var qNum = 7,
     answerArr = new Array(),
     flagArr = new Array(),
-    musicArr = ['./audio/01.ogg', './audio/02大火.ogg', './audio/03倒带.ogg', './audio/04打字+消息声_缩混.ogg', './audio/05欢呼.ogg', './audio/06拍照.ogg', './audio/01.ogg', './audio/01.ogg', ],
+    musicOggArr = ['./audio/01.ogg', './audio/02大火.ogg', './audio/03倒带.ogg', './audio/04打字+消息声_缩混.ogg', './audio/05欢呼.ogg', './audio/06拍照.ogg', './audio/01.ogg', './audio/01.ogg', ],
     histroyBgImg = ['../img/06/guoji.png', '../img/06/hulianwang.png', '../img/06/qiyecaijing.png', '../img/06/shehui.png', '../img/06/weifafanzui.png', '../img/06/wentiyule.png', '../img/06/zainan.png', '../img/06/zhengwu.png'],
     ClickFlag = false,
     modifier = 2; //每天的px
 
 $(document).ready(function () {
 
-    //触屏即加载音乐
-    document.addEventListener('touchstart', function () {
-        document.getElementById('audio').play()
-    })
+    // //触屏即加载音乐
+    // document.addEventListener('touchstart', function () {
+    //     document.getElementById('audio').play()
+    // })
 
-    //进入微信页面即加载
-    document.addEventListener('WeixinJSBridgeReady', function () {
-        document.getElementById('audio').play()
-    })
+    // //进入微信页面即加载
+    // document.addEventListener('WeixinJSBridgeReady', function () {
+    //     document.getElementById('audio').play()
+    // })
 
     //隐藏弹出框
     $(".hide-share-bg").hide()
     $(".share-content").hide()
 
-    $("audio").attr("src", musicArr[0])
-
-    $(".music-switch").click(function () { //音乐的播放和暂停
-        if ($(".music").hasClass("play")) {
-            $(".music").removeClass("play");
-            $("audio")[0].pause(); /*暂停*/
+    //音乐加载地址
+    $("audio").attr("src", musicOggArr[0])
+    var oAudio = $('#audio').get(0);
+    console.log(oAudio)
+    //判断音乐的播放和暂停
+    $(".music-switch").click(function () {
+        if (audio.paused) {
+            oAudio.play();
         } else {
-            $(".music").addClass("play");
-            $("audio")[0].play(); /*播放*/
+            oAudio.pause();
         }
     })
+
+    oAudio.addEventListener("canplay", function () { //监听audio是否加载完毕，如果加载完毕，则读取audio播放时间
+        // console.log(audio.duration)
+        // console.log(audio.paused)
+        if (audio.paused) {
+            oAudio.play();
+        } else {
+            oAudio.pause();
+        }
+    });
 
     var mySwiper = new Swiper('#eventsSwiper', {
         direction: 'vertical', // 垂直切换选项
@@ -89,7 +100,7 @@ $(document).ready(function () {
             init: function () {
                 mySlides = '';
                 for (var i = 0; i < historyList.length; i++) {
-                    this.appendSlide('<div class="swiper-slide slide' + i + '"><div class="event-msg"><a target="_blank" href="' + historyList[i]['hrefEv'] + '"><img class="srcImg" src="' + historyList[i]['srcImg'] + '"/><p>' + historyList[i]['title'] + '</p></div></a></div>');
+                    this.appendSlide('<div class="swiper-slide slide' + i + '"><div class="event-msg"><a target="_self" href="' + historyList[i]['hrefEv'] + '"><img class="srcImg" src="' + historyList[i]['srcImg'] + '"/><p>' + historyList[i]['title'] + '</p></div></a></div>');
                     if (historyList[i]['danmuContent']) {
                         $("#slide_7 .screen .s_show").append("<div class='magictime twisterInUp'><img src='" + historyList[i]['hraderImg'] + "'/><span>" + historyList[i]['danmuContent'] + "</span></div>")
                     }
@@ -132,10 +143,10 @@ $(document).ready(function () {
 
                 if ($(".music").hasClass("play")) {
                     $(".music").addClass("play");
-                    $("audio").attr("src", musicArr[mySwiper.realIndex])[0].play(); /*播放*/
+                    $("audio").attr("src", musicOggArr[mySwiper.realIndex])[0].play(); /*播放*/
                 } else {
                     $(".music").removeClass("play");
-                    $("audio").attr("src", musicArr[mySwiper.realIndex])[0].pause(); /*暂停*/
+                    $("audio").attr("src", musicOggArr[mySwiper.realIndex])[0].pause(); /*暂停*/
                 }
 
                 var realIndex = mySwiper.realIndex + 1;
