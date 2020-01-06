@@ -6,6 +6,10 @@ var qNum = 7,
     ClickFlag = false,
     modifier = 2,
     isAudio = false; //每天的px
+document.addEventListener("WeixinJSBridgeReady", function () {
+    document.getElementById('audio').play();
+
+}, false);
 
 $(document).ready(function () {
 
@@ -18,11 +22,6 @@ $(document).ready(function () {
     // document.addEventListener('WeixinJSBridgeReady', function () {
     //     document.getElementById('audio').play()
     // })
-
-    document.addEventListener("WeixinJSBridgeReady", function () {
-        document.getElementById('audio').play();
-
-    }, false);
 
     //隐藏弹出框
     $(".hide-share-bg").hide()
