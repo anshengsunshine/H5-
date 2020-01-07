@@ -1,7 +1,7 @@
 var qNum = 7,
     answerArr = new Array(),
     flagArr = new Array(),
-    musicOggArr = ['./audio/01.ogg', './audio/02大火.ogg', './audio/03倒带.ogg', './audio/04打字+消息声_缩混.ogg', './audio/05欢呼.ogg', './audio/06拍照.ogg', './audio/01.ogg', './audio/01.ogg', ],
+    musicMp3Arr = ['./audio/01.mp3', './audio/02大火.mp3', './audio/03倒带.mp3', './audio/04打字+消息声_缩混.mp3', './audio/05欢呼.mp3', './audio/06拍照.mp3', './audio/01.mp3', './audio/01.mp3', ],
     histroyBgImg = ['../img/06/guoji.png', '../img/06/hulianwang.png', '../img/06/qiyecaijing.png', '../img/06/shehui.png', '../img/06/weifafanzui.png', '../img/06/wentiyule.png', '../img/06/zainan.png', '../img/06/zhengwu.png'],
     ClickFlag = false,
     modifier = 2,
@@ -22,6 +22,11 @@ $(document).ready(function () {
     // document.addEventListener('WeixinJSBridgeReady', function () {
     //     document.getElementById('audio').play()
     // })
+    document.addEventListener("WeixinJSBridgeReady", function () {
+        document.getElementById('audio').play();
+        // document.getElementById('video').play(); 
+        //视频自动播放
+    }, false);
 
     //隐藏弹出框
     $(".hide-share-bg").hide()
@@ -30,7 +35,7 @@ $(document).ready(function () {
 
 
     //音乐加载地址
-    $("audio").attr("src", musicOggArr[0])
+    $("audio").attr("src", musicMp3Arr[0])
     var oAudio = $('#audio').get(0);
     oAudio.addEventListener("canplay", function () { //监听audio是否加载完毕
         isAudio = audio.paused
@@ -147,11 +152,11 @@ $(document).ready(function () {
                 if (isAudio) {
                     if ($(".music").hasClass("play") && !audio.paused) {
                         $(".music").addClass("play");
-                        $("audio").attr("src", musicOggArr[mySwiper.realIndex])[0].play(); /*播放*/
+                        $("audio").attr("src", musicMp3Arr[mySwiper.realIndex])[0].play(); /*播放*/
                         audio.paused = false;
                     } else {
                         $(".music").removeClass("play");
-                        $("audio").attr("src", musicOggArr[mySwiper.realIndex])[0].pause(); /*暂停*/
+                        $("audio").attr("src", musicMp3Arr[mySwiper.realIndex])[0].pause(); /*暂停*/
                         audio.paused = true;
                     }
                 }
