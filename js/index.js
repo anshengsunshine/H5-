@@ -6,10 +6,21 @@ var qNum = 7,
     ClickFlag = false,
     modifier = 2,
     isAudio = false; //每天的px
-document.addEventListener("WeixinJSBridgeReady", function () {
-    document.getElementById('audio').play();
 
-}, false);
+function is_weixin() {
+    var ua = navigator.userAgent.toLowerCase();
+    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+        alert("true==是微信环境")
+        document.addEventListener("WeixinJSBridgeReady", function () {
+            document.getElementById('audio').play();
+        }, false);
+        return true;
+    } else {
+        console.log("false==不是微信环境")
+        return false;
+    }
+}
+is_weixin()
 
 $(document).ready(function () {
 
@@ -22,11 +33,6 @@ $(document).ready(function () {
     // document.addEventListener('WeixinJSBridgeReady', function () {
     //     document.getElementById('audio').play()
     // })
-    document.addEventListener("WeixinJSBridgeReady", function () {
-        document.getElementById('audio').play();
-        // document.getElementById('video').play(); 
-        //视频自动播放
-    }, false);
 
     //隐藏弹出框
     $(".hide-share-bg").hide()
